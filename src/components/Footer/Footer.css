@@ -1,0 +1,24 @@
+.footer-section {
+  width: 100%;
+  display: flex;
+  padding: 4.6rem 8.4rem;
+  position: relative;
+  background-color: var(--clr-dark-green);
+  font-family: 'Roboto', sans-serif;
+  color: var(--clr-white);
+}
+
+.footer-left {
+    flex: 0 0 40%;
+}
+.footer-right {
+    flex: 0 0 60%;
+}
+
+.white-cross{
+    width: 8.8rem;
+    position: absolute;
+    top: 0;
+    margin-top: -3.8rem;
+    left: 20%;
+}

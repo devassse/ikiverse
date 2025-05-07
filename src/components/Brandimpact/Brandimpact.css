@@ -1,0 +1,9 @@
+.work-section{
+    height: 100vh;
+    position: relative;
+}
+
+.content-above {
+    position: absolute;
+    z-index: 2;
+}

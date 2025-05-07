@@ -1,0 +1,63 @@
+/*
+* Navigation bar styles
+**/
+
+/* Toolbar Navibar */
+.toolbar-navibar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--clr-main);
+    font-family: 'Roboto';
+    padding: 1.6rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    color: var(--clr-white);
+}
+
+.logo-img {
+    width: 4.8rem;
+    height: 4.8rem;
+}
+
+.logo h1 {
+    font-size: 3.2rem;
+    font-weight: 400;
+}
+
+/*
+* Navigation menu
+*/
+.navbar-menu ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-menu ul li {
+    display: inline-block;
+    color: var(--clr-white);
+    transition: background-color 0.3s ease;
+}
+
+.navbar-menu ul li:hover {
+    background-color: var(--clr-secondary);
+}
+
+.navbar-menu ul li a {
+    text-decoration: none;
+    color: var(--clr-white);
+    font-family: 'Roboto';
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 1.2rem;
+}
+
+.navbar-menu ul li a:hover {
+    background-color: var(--clr-secondary);
+    border-radius: 0.4rem;
+}

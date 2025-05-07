@@ -1,0 +1,27 @@
+.hero-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--clr-green);
+}
+
+.col-left{
+    flex: 1;
+    padding: 20px;
+    text-align: right;
+    font-size: 2.8rem;
+    color: var(--clr-hero);
+    line-height: 1;
+    font-weight: 700;
+    border-right: 1px solid var(--clr-dark-gray);
+}
+.col-right{
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--clr-white);
+}
