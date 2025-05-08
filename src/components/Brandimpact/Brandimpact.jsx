@@ -16,8 +16,12 @@ const Work = () => {
           <color attach="background" args={['#00bba0']} />
           <OrbitControls />
           <ambientLight intensity={0.5} />
-          <mesh>
+          {/* <mesh>
             <boxGeometry />
+            <meshStandardMaterial color="orange" />
+          </mesh> */}
+          <mesh rotation={[Math.PI / 3, Math.PI / 2, 0]}>
+            <boxGeometry args={[2, 2, 2]} />
             <meshStandardMaterial color="orange" />
           </mesh>
         </Canvas>
