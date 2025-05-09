@@ -5,7 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 import { TextureLoader } from 'three'
 
 const Work = () => {
-  const colorMap = useLoader(TextureLoader, './src/assets/resources/PavingStones092_1K-JPG_Color.jpg')
+  const colorMap = useLoader(TextureLoader, '/src/assets/resources/PavingStones092_1K-JPG_Color.jpg')
 
   return (
     <>
@@ -23,7 +23,7 @@ const Work = () => {
           <directionalLight />
           <mesh>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial map={colorMap} />
+        <meshStandardMaterial map={colorMap || ''} />
       </mesh>
           {/* <mesh>
             <boxGeometry args={[1, 1, 1, 10, 10, 10]} />
