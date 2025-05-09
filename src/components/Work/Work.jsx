@@ -23,7 +23,7 @@ const Work = () => {
           <directionalLight />
           <mesh>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial map={colorMap || ''} />
+        {/* <meshStandardMaterial map={colorMap || ''} /> */}
       </mesh>
           {/* <mesh>
             <boxGeometry args={[1, 1, 1, 10, 10, 10]} />
