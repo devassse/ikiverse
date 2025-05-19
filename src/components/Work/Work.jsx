@@ -1,11 +1,11 @@
 import React from "react";
 import "./Work.css";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber"; //useLoader
 import { OrbitControls } from "@react-three/drei";
 import { TextureLoader } from 'three'
 
 const Work = () => {
-  const colorMap = useLoader(TextureLoader, '/src/assets/resources/PavingStones092_1K-JPG_Color.jpg')
+  // const colorMap = useLoader(TextureLoader, '/src/assets/resources/PavingStones092_1K-JPG_Color.jpg')
 
   return (
     <>
