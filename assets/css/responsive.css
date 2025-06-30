@@ -1,0 +1,54 @@
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-navbar {
+    display: none;
+  }
+  .hamburger-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* HERO SECTION */
+  .hero-content {
+    flex-direction: column;
+  }
+  .hero-content h1 {
+    border-right: none;
+    border-bottom: 1px solid var(--clr-purple);
+    padding-bottom: 1.8rem;
+    text-align: center;
+  }
+  .hero-content h2 {
+    text-align: center;
+  }
+
+  .what-we-do-content {
+    grid-template-columns: 1fr;
+  }
+
+  .what-we-do-description p {
+    margin-bottom: 6rem;
+  }
+
+  .what-we-do-categories .category {
+    height: 40vh;
+  }
+
+  .category img {
+    width: 17%;
+  }
+
+  .stand-out-content {
+  grid-template-columns: 1fr;
+}
+
+.stand-out-description{
+    padding-left: 20rem;
+}
+}
