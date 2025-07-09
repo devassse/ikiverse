@@ -52,3 +52,11 @@
     padding-left: 20rem;
 }
 }
+
+@media screen and (max-width: 560px) {
+
+  .stand-out-floating-door{
+    width: 50rem;
+  }
+  
+}

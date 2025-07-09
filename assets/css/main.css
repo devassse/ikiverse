@@ -23,12 +23,12 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 section {
   width: 100%;
   height: 100vh;
-  padding: 5rem 0;
 }
 /***************/
 /* HEADER SECTION */
@@ -249,6 +249,7 @@ header {
 }
 
 .stand-out-content {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   position: relative;
@@ -324,7 +325,7 @@ header {
 
 /* Brands Slider */
 .brands-slider {
-  margin-top: -10%;
+  /* margin-top: -10%; */
   background-color: var(--clr-green);
   padding: 2rem 0;
   display: flex;
@@ -346,12 +347,19 @@ header {
 
 .brands-gallery {
   background-color: var(--clr-green);
+  position: relative;
 }
 
 .brands-one {
   margin: 0 auto;
   width: 80%;
+  /* Old Approach to center Content */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
 .brand-gallery-cell {
   width: 30%;
 }
@@ -366,7 +374,7 @@ header {
   grid-template-columns: 45% 55%;
   gap: 6rem;
   align-items: center;
-  margin-top: -14rem;
+  /* margin-top: -14rem; */
   background-color: var(--clr-green);
   padding-left: 10rem;
   overflow: hidden;
@@ -412,7 +420,7 @@ header {
 
 .brands-impact-description p {
   width: 60%;
-   margin-top: 2rem;
+  margin-top: 2rem;
   font-size: 2.8rem;
   font-weight: 500;
   line-height: 1.1;
@@ -424,116 +432,177 @@ header {
 
 .brands-impact-slider{
   overflow: auto;
-
+  overflow-y: hidden;
 }
 
 .brands-impact-gallery-cell{
-  width: 53%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .brands-impact-gallery-cell img {
+  width: 100%;
+}
+
+/* Make Impossible Section */
+.make-impossible {
+  background-color: var(--clr-green);
+  position: relative;
+}
+
+.make-impossible-gallery-cell{
+  width: 50%;
+}
+
+.make-impossible-description{
+  color: var(--clr-white);
+}
+
+.make-impossible-gallery-cell {
+  width: 30%;
+}
+
+.make-impossible-gallery-cell img {
   width: 95%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.carousel {
-  background: black;
+.make-impossibel-square img{
+  position: absolute;
+  width: 20rem;
+  top: -7rem;
+  left: 38vw;
+  z-index: 2;
 }
 
-.carousel-cell {
-  width: 70%;
-  height: 200px;
-  /* flex-box, center image in cell */
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  align-items: center;
+.make-impossible-description {
+  padding-top: 3rem;
+  
 }
 
-.carousel-cell img {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  /* dim unselected */
-  opacity: 0.7;
-  -webkit-transform: scale(0.85);
-  transform: scale(0.85);
-  -webkit-filter: blur(5px);
-  filter: blur(5px);
-  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s, transform 0.3s,
-    -webkit-filter 0.3s, filter 0.3s;
-  transition: opacity 0.3s, transform 0.3s, filter 0.3s;
+.make-impossible-description p {
+  font-size: 2rem;
 }
 
-/* brighten selected image */
-.carousel-cell.is-selected img {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  -webkit-filter: none;
-  filter: none;
+.make-impossible-description h4 {
+  font-size: 4.4rem;
+  line-height: 0.3;
+  color: var(--clr-green-ligth);
+  margin-top: 2rem;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
 }
 
-@media screen and (min-width: 768px) {
-  .carousel-cell {
-    height: 400px;
-  }
-}
-
-@media screen and (min-width: 960px) {
-  .carousel-cell {
-    width: 60%;
-  }
-}
-
-/* buttons, no circle */
-.flickity-prev-next-button {
-  width: 60px;
-  height: 60px;
-  background: transparent;
-  opacity: 0.6;
-}
-.flickity-prev-next-button:hover {
-  background: transparent;
-  opacity: 1;
-}
-/* arrow color */
-.flickity-prev-next-button .arrow {
-  fill: white;
-}
-.flickity-prev-next-button.no-svg {
-  color: white;
-}
-/* closer to edge */
-.flickity-prev-next-button.previous {
+.make-impossible-description h4::before {
+  content: "";
+  position: absolute;
+  top: 90%;
   left: 0;
+  transform: translateY(-50%);
+  width: 107%;
+  height: 1.4rem;
+  background-color: var(--clr-purple);
+  z-index: -1;
+  border-radius: 2px;
 }
-.flickity-prev-next-button.next {
-  right: 0;
+
+/* ABout and Team Section */
+.about-and-team {
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
-/* hide disabled button */
-.flickity-prev-next-button:disabled {
-  display: none;
+
+.about-content,
+.team-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.about-content img,
+.team-content img{
+  width: 18rem;
+}
+
+.about-content h4,
+.team-content h4{
+  font-size: 5.8rem;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.about-content h4 span,
+.team-content h4 span{
+  font-weight: 900;
+  font-style: normal;
+  font-size: 6.2rem;
+}
+
+.about-content h4{
+  margin-top: 2.4rem;
+  line-height: 1;
+}
+
+.team-content h4{
+  margin-bottom: 2.4rem;
+  line-height: 1;
+}
+
+/* Our Customers */
+.our-customers {
+  background-color: var(--clr-green);
+  padding: 12rem 14rem;
+}
+
+.our-customers-content{
+  width: 100%;
+  margin: 0 auto;
+  color: var(--clr-white);
+}
+
+.our-customers-content h4 {
+  font-size: 4.8rem;
+  line-height: 1;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 100;
+}
+
+.our-customers-content h4 span {
+  font-weight: 900;
+  font-style: normal;
+  position: relative;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+.our-customers-content h4 span::before {
+  content: "";
+  position: absolute;
+  top: 70%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 115%;
+  height: 1.4rem;
+  background-color: var(--clr-purple);
+  z-index: -1;
+  border-radius: 2px;
+}
+
+.our-customers-logos {
+  margin-top: 8rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 4rem;
+  text-align: center;
 }
