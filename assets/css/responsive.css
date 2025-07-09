@@ -1,9 +1,11 @@
+/* Medium Devices */
 @media screen and (max-width: 1024px) {
   html {
     font-size: 50%;
   }
 }
 
+/* Tablets */
 @media screen and (max-width: 768px) {
   .main-navbar {
     display: none;
@@ -53,6 +55,7 @@
 }
 }
 
+/* Small Devices */
 @media screen and (max-width: 560px) {
 
   .stand-out-floating-door{
