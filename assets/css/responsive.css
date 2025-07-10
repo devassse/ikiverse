@@ -7,6 +7,13 @@
 
 /* Tablets */
 @media screen and (max-width: 768px) {
+  html {
+    font-size: 40%;
+  }
+  /* .stand-out {
+    padding-top: 30rem;
+  } */
+
   .main-navbar {
     display: none;
   }
@@ -47,19 +54,45 @@
   }
 
   .stand-out-content {
-  grid-template-columns: 1fr;
-}
+    grid-template-columns: 1fr;
+  }
 
-.stand-out-description{
-    padding-left: 20rem;
-}
+  .stand-out-description {
+    padding-left: 50rem;
+  }
+
+  .our-customers-logo img{
+    width: 70%;
+  }
 }
 
 /* Small Devices */
 @media screen and (max-width: 560px) {
-
-  .stand-out-floating-door{
+  .stand-out-floating-door {
     width: 50rem;
   }
-  
+
+  .footer-content {
+    flex-direction: column;
+    align-items: left;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .stand-out-person {
+    width: 30rem;
+    margin-top: 10rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .stand-out-person {
+    width: 20rem;
+    margin-top: 20rem;
+  }
+
+  .stand-out-floating-door {
+    width: 40rem;
+  }
 }
