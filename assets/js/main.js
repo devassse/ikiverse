@@ -18,13 +18,15 @@ closeIcon.addEventListener("click", function () {
   navbar.classList.remove("navbar-mobile");
 });
 
-// Clicking on a link closes the navbar
+//IF Screen Width is less than 768px
 links.forEach((link) => {
   link.addEventListener("click", () => {
-    closeIcon.classList.add("hidden");
-    openIcon.classList.remove("hidden");
-    navbar.style.display = "none";
-    navbar.classList.remove("navbar-mobile");
+    if (window.innerWidth <= 768) {
+      closeIcon?.classList.add("hidden");
+      openIcon?.classList.remove("hidden");
+      navbar.style.display = "none";
+      navbar.classList.remove("navbar-mobile");
+    }
   });
 });
 
