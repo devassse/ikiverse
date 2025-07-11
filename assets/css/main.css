@@ -505,6 +505,20 @@ header {
   align-items: center;
   flex-direction: column;
   text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.about-content {
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+    url('../imgs/about/meet-team.png');
+}
+.team-content {
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+    url('../imgs/about/meet-ikigai.png');
 }
 
 .about-content img,
