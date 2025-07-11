@@ -3,6 +3,20 @@
   html {
     font-size: 50%;
   }
+
+  .ikiverse-ovin {
+    top: 30%;
+  }
+
+  .ikiverse-ovin img {
+    width: 60%;
+    height: auto;
+  }
+
+  .ikiverse-galaxy h5 {
+    top: 42rem;
+    right: 42vw;
+  }
 }
 
 /* Tablets */
@@ -61,8 +75,31 @@
     padding-left: 50rem;
   }
 
-  .our-customers-logo img{
+  .our-customers-logo img {
     width: 70%;
+  }
+
+  /* IKIVERSE PAGE */
+  .ikiverse-ovin {
+    top: 23%;
+  }
+
+  .ikiverse-planets img {
+    width: 100%;
+    height: auto;
+  }
+
+  .ikiverse-galaxy h5 {
+    top: 46rem;
+    right: 62vw;
+  }
+}
+
+@media screen and (max-width: 686px) {
+  .galaxy img {
+    width: 60%;
+    top: 20rem;
+    right: -2rem;
   }
 }
 
@@ -72,10 +109,36 @@
     width: 50rem;
   }
 
+  .ikiverse-fakenews {
+    text-align: center;
+  }
+
+  .ikiverse-fakenews img {
+    width: 70%;
+  }
+
+  .ikiverse-planets {
+    width: 76%;
+  }
+
+  .galaxy img {
+    width: 60%;
+    right: 4rem;
+  }
+
+  .go-in-hand img {
+    width: 65%;
+    margin-top: 10rem;
+    margin-right: -20rem;
+  }
+
+  .ikiverse-galaxy h5 {
+    right: 46vw;
+  }
+
   .footer-content {
-    flex-direction: column;
-    align-items: left;
-    text-align: left;
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 }
 
@@ -87,6 +150,9 @@
 }
 
 @media screen and (max-width: 425px) {
+  .ikiverse-section{
+    height: 156vh;
+  }
   .stand-out-person {
     width: 20rem;
     margin-top: 20rem;
@@ -94,5 +160,20 @@
 
   .stand-out-floating-door {
     width: 40rem;
+  }
+
+  .ikiverse-planets{
+    top: 80%;
+  }
+
+  .ikiverse-galaxy {
+    top: 115%;
+  }
+
+  .ikiverse-galaxy h4{
+    top: -10rem;
+  }
+  .ikiverse-galaxy h5{
+    right: 56vw;
   }
 }
