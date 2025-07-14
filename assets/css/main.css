@@ -512,14 +512,12 @@ header {
 }
 
 .about-content {
-  background-image: 
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-    url('../imgs/about/meet-team.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../imgs/about/meet-team.png");
 }
 .team-content {
-  background-image: 
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-    url('../imgs/about/meet-ikigai.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../imgs/about/meet-ikigai.png");
 }
 
 .about-content img,
@@ -529,7 +527,7 @@ header {
   transform-origin: center;
 }
 
-.about-content img{
+.about-content img {
   animation-direction: reverse;
 }
 
@@ -719,11 +717,13 @@ footer {
           IKIVERSE PAGE 
 ============================== */
 .ikiverse-section {
-  height: 190vh;
+  height: 200vh;
   display: flex;
   justify-content: center;
   color: var(--clr-white);
   background: url(../imgs/ikiverse-stars-bg.png);
+  /* position: relative; */
+  z-index: 1;
 }
 
 .ikiverse-section::before {
@@ -890,4 +890,12 @@ footer {
 .ikiverse-galaxy h5 span {
   font-weight: 900;
   font-style: normal;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 1;
 }
