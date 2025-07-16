@@ -898,4 +898,5 @@ canvas {
   left: 0;
   display: block;
   z-index: 1;
+  height: 200vh;
 }

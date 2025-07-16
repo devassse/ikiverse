@@ -224,3 +224,49 @@
     right: 56vw;
   }
 }
+
+@media screen and (max-width: 360px) {
+  .ikiverse-section {
+    height: 200vh;
+  }
+
+  .ikiverse-ovin {
+    top: 32%;
+  }
+
+  .ikiverse-ovin img {
+    width: 80%;
+    height: auto;
+  }
+
+  .ikiverse-fakenews {
+    top: 65%;
+  }
+
+  .ikiverse-planets {
+    top: 107%;
+  }
+
+  .ikiverse-galaxy {
+    top: 150%;
+  }
+
+  .ikiverse-galaxy h4 {
+    top: 4rem;
+  }
+
+  .ikiverse-galaxy h5 {
+    top: 50rem;
+    right: 60vw;
+  }
+
+  .galaxy img {
+    width: 70%;
+    top: 25rem;
+    right: -2rem;
+  }
+
+  .go-in-hand img {
+    margin-top: 26rem;
+  }
+}

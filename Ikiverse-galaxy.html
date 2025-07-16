@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galáxia Estelar Avançada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(ellipse at center, #0c0c1e 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            /* cursor: none; */
+        }
+
+        .galaxy-container {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            left: -25%;
+            top: -25%;
+            animation: galaxyRotation 120s linear infinite;
+            transform-origin: center center;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite alternate;
+        }
+
+        .star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(0.5px);
+        }
+
+        .star::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, currentColor 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+            animation: starPulse 3s ease-in-out infinite alternate;
+        }
+
+        .star-tiny {
+            width: 1px;
+            height: 1px;
+            animation-duration: 4s;
+            box-shadow: 0 0 2px currentColor;
+        }
+
+        .star-small {
+            width: 2px;
+            height: 2px;
+            animation-duration: 3s;
+            box-shadow: 0 0 4px currentColor;
+        }
+
+        .star-medium {
+            width: 4px;
+            height: 4px;
+            animation-duration: 2s;
+            box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+        }
+
+        .star-large {
+            width: 6px;
+            height: 6px;
+            animation-duration: 1.5s;
+            box-shadow: 0 0 12px currentColor, 0 0 24px currentColor, 0 0 36px currentColor;
+        }
+
+        .star-giant {
+            width: 8px;
+            height: 8px;
+            animation-duration: 1s;
+            box-shadow: 0 0 16px currentColor, 0 0 32px currentColor, 0 0 48px currentColor, 0 0 64px currentColor;
+        }
+
+        .star-blue { background: #4fc3f7; color: #4fc3f7; }
+        .star-white { background: #ffffff; color: #ffffff; }
+        .star-yellow { background: #ffeb3b; color: #ffeb3b; }
+        .star-red { background: #f44336; color: #f44336; }
+        .star-purple { background: #9c27b0; color: #9c27b0; }
+        .star-cyan { background: #00bcd4; color: #00bcd4; }
+        .star-pink { background: #e91e63; color: #e91e63; }
+        .star-orange { background: #ff9800; color: #ff9800; }
+        .star-green { background: #4caf50; color: #4caf50; }
+        .star-indigo { background: #3f51b5; color: #3f51b5; }
+        .star-lime { background: #cddc39; color: #cddc39; }
+        .star-teal { background: #009688; color: #009688; }
+
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(8px);
+            animation: nebulaPulse 12s ease-in-out infinite alternate;
+            opacity: 0.4;
+        }
+
+        .nebula-1 {
+            width: 400px;
+            height: 200px;
+            background: radial-gradient(ellipse, rgba(147, 51, 234, 0.6) 0%, rgba(59, 130, 246, 0.3) 50%, transparent 100%);
+            top: 15%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .nebula-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(147, 51, 234, 0.2) 50%, transparent 100%);
+            top: 55%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        .nebula-3 {
+            width: 350px;
+            height: 150px;
+            background: radial-gradient(ellipse, rgba(236, 72, 153, 0.5) 0%, rgba(168, 85, 247, 0.3) 50%, transparent 100%);
+            top: 35%;
+            left: 55%;
+            animation-delay: 6s;
+        }
+
+        .nebula-4 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.3) 0%, rgba(59, 130, 246, 0.2) 50%, transparent 100%);
+            top: 70%;
+            left: 20%;
+            animation-delay: 9s;
+        }
+
+        .dust-cloud {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="70" r="0.3" fill="rgba(255,255,255,0.08)"/><circle cx="45" cy="60" r="0.4" fill="rgba(255,255,255,0.06)"/><circle cx="90" cy="20" r="0.2" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="80" r="0.6" fill="rgba(255,255,255,0.04)"/></svg>');
+            animation: dustFloat 200s linear infinite;
+            opacity: 0.3;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .title {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            animation: titleGlow 4s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, #ffffff, #4fc3f7, #9c27b0, #ffffff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 4s ease-in-out infinite alternate, gradientShift 6s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            opacity: 0.9;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            animation: subtitleFloat 3s ease-in-out infinite alternate;
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: linear-gradient(45deg, white, transparent);
+            border-radius: 50%;
+            animation: shootingStar 4s linear infinite;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+            transform: translate(-50%, -50%) rotate(45deg);
+            border-radius: 50%;
+        }
+
+        .comet {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #ffffff, #4fc3f7);
+            border-radius: 50%;
+            animation: comet 8s linear infinite;
+            box-shadow: 0 0 20px #4fc3f7, 0 0 40px #4fc3f7;
+        }
+
+        .comet::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(79,195,247,0.8), rgba(156,39,176,0.4), transparent);
+            transform: translate(-50%, -50%) rotate(35deg);
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .custom-cursor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .wormhole {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, transparent 20%, rgba(147, 51, 234, 0.2) 40%, rgba(59, 130, 246, 0.1) 60%, transparent 80%);
+            animation: wormholeRotate 10s linear infinite, wormholePulse 5s ease-in-out infinite alternate;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(2px);
+        }
+
+        @keyframes galaxyRotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.4; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes starPulse {
+            0% { opacity: 0.2; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        @keyframes nebulaPulse {
+            0% { opacity: 0.3; transform: scale(0.9) rotate(0deg); }
+            100% { opacity: 0.7; transform: scale(1.2) rotate(15deg); }
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+            100% { text-shadow: 0 0 40px rgba(255, 255, 255, 1), 0 0 60px rgba(147, 51, 234, 0.8); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes subtitleFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @keyframes shootingStar {
+            0% {
+                transform: translateX(-200px) translateY(-200px);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateX(calc(100vw + 200px)) translateY(calc(100vh + 200px));
+                opacity: 0;
+            }
+        }
+
+        @keyframes comet {
+            0% {
+                transform: translateX(-300px) translateY(-300px) rotate(0deg);
+                opacity: 0;
+            }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% {
+                transform: translateX(calc(100vw + 300px)) translateY(calc(100vh + 300px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes dustFloat {
+            0% { transform: translateX(-100px) rotate(0deg); }
+            100% { transform: translateX(calc(100vw + 100px)) rotate(360deg); }
+        }
+
+        @keyframes wormholeRotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes wormholePulse {
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
+            100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            .subtitle {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="dust-cloud"></div>
+    <div class="wormhole"></div>
+    <div class="galaxy-container" id="galaxy"></div>
+    
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+    <div class="nebula nebula-3"></div>
+    <div class="nebula nebula-4"></div>
+    
+    <div class="content">
+        <h1 class="title">COSMOS INFINITO</h1>
+        <p class="subtitle">Navegando pelas estrelas do universo</p>
+    </div>
+
+    <script>
+        const galaxy = document.getElementById('galaxy');
+        const cursor = document.getElementById('cursor');
+        const colors = ['blue', 'white', 'yellow', 'red', 'purple', 'cyan', 'pink', 'orange', 'green', 'indigo', 'lime', 'teal'];
+        const sizes = ['tiny', 'small', 'medium', 'large', 'giant'];
+        let mouseX = 0, mouseY = 0;
+        
+        // Cursor customizado
+        // document.addEventListener('mousemove', (e) => {
+        //     mouseX = e.clientX;
+        //     mouseY = e.clientY;
+        //     cursor.style.left = mouseX - 10 + 'px';
+        //     cursor.style.top = mouseY - 10 + 'px';
+            
+        //     // Efeito de paralaxe na galáxia
+        //     const parallaxX = (mouseX / window.innerWidth - 0.5) * 50;
+        //     const parallaxY = (mouseY / window.innerHeight - 0.5) * 50;
+        //     galaxy.style.transform = `translate(${parallaxX}px, ${parallaxY}px)`;
+        // });
+        
+        // Criar estrelas avançadas
+        function createAdvancedStars() {
+            for (let i = 0; i < 800; i++) {
+                const star = document.createElement('div');
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+                
+                star.className = `star star-${randomColor} star-${randomSize}`;
+                
+                // Distribuição espiral da galáxia
+                const angle = (i / 800) * Math.PI * 8;
+                const radius = Math.sqrt(i / 800) * 50;
+                const x = 50 + radius * Math.cos(angle) + (Math.random() - 0.5) * 20;
+                const y = 50 + radius * Math.sin(angle) + (Math.random() - 0.5) * 20;
+                
+                star.style.left = x + '%';
+                star.style.top = y + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+                
+                // Adicionar efeito de profundidade
+                const depth = Math.random();
+                star.style.transform = `scale(${0.3 + depth * 0.7})`;
+                star.style.opacity = 0.3 + depth * 0.7;
+                
+                galaxy.appendChild(star);
+            }
+        }
+        
+        // Criar estrelas cadentes avançadas
+        function createAdvancedShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 50;
+            
+            shootingStar.style.left = startX + '%';
+            shootingStar.style.top = startY + '%';
+            shootingStar.style.animationDelay = Math.random() * 1 + 's';
+            shootingStar.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            
+            document.body.appendChild(shootingStar);
+            
+            setTimeout(() => {
+                shootingStar.remove();
+            }, 4000);
+        }
+        
+        // Criar cometas
+        function createComet() {
+            const comet = document.createElement('div');
+            comet.className = 'comet';
+            
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 50;
+            
+            comet.style.left = startX + '%';
+            comet.style.top = startY + '%';
+            comet.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.body.appendChild(comet);
+            
+            setTimeout(() => {
+                comet.remove();
+            }, 8000);
+        }
+        
+        // Adicionar estrelas com clique
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('div');
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+                
+                star.className = `star star-${randomColor} star-${randomSize}`;
+                star.style.left = ((e.clientX / window.innerWidth) * 100) + '%';
+                star.style.top = ((e.clientY / window.innerHeight) * 100) + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+                
+                galaxy.appendChild(star);
+            }
+            
+            // Efeito de explosão no cursor
+            cursor.style.transform = 'scale(2)';
+            cursor.style.boxShadow = '0 0 40px rgba(255, 255, 255, 0.8)';
+            
+            setTimeout(() => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.3)';
+            }, 200);
+        });
+        
+        // Efeito de respiração na galáxia
+        setInterval(() => {
+            galaxy.style.filter = `brightness(${0.8 + Math.random() * 0.4}) contrast(${0.9 + Math.random() * 0.2})`;
+        }, 2000);
+        
+        // Inicializar
+        createAdvancedStars();
+        
+        // Criar estrelas cadentes periodicamente
+        setInterval(createAdvancedShootingStar, 1500);
+        
+        // Criar cometas periodicamente
+        setInterval(createComet, 8000);
+        
+        // Adicionar novas estrelas dinamicamente
+        setInterval(() => {
+            if (galaxy.children.length < 1000) {
+                const star = document.createElement('div');
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+                
+                star.className = `star star-${randomColor} star-${randomSize}`;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                
+                galaxy.appendChild(star);
+            }
+        }, 3000);
+        
+        // Efeito de ondas de energia
+        setInterval(() => {
+            const wave = document.createElement('div');
+            wave.style.position = 'absolute';
+            wave.style.width = '2px';
+            wave.style.height = '2px';
+            wave.style.background = 'radial-gradient(circle, rgba(255,255,255,0.8), transparent)';
+            wave.style.borderRadius = '50%';
+            wave.style.left = '50%';
+            wave.style.top = '50%';
+            wave.style.transform = 'translate(-50%, -50%)';
+            wave.style.animation = 'waveExpansion 3s ease-out forwards';
+            wave.style.pointerEvents = 'none';
+            
+            document.body.appendChild(wave);
+            
+            setTimeout(() => wave.remove(), 3000);
+        }, 5000);
+        
+        // Adicionar animação de ondas
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes waveExpansion {
+                0% {
+                    width: 2px;
+                    height: 2px;
+                    opacity: 0.8;
+                }
+                100% {
+                    width: 300px;
+                    height: 300px;
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
