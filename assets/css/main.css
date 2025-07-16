@@ -855,6 +855,15 @@ footer {
   animation: zoomInOut 4s ease-in-out infinite;
 }
 
+.go-in-hand a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+}
+
 .go-in-hand img {
   width: 90%;
   margin-top: -8rem;
@@ -874,6 +883,11 @@ footer {
   right: 0;
 }
 
+.ikiverse-galaxy h5 a {
+  color: var(--clr-green-light);
+  text-decoration: none;
+}
+
 .ikiverse-galaxy h5 {
   width: 12rem;
   font-size: 3.4rem;
@@ -885,6 +899,7 @@ footer {
   position: absolute;
   top: 26rem;
   right: 34vw;
+  z-index: 2;
 }
 
 .ikiverse-galaxy h5 span {
@@ -898,5 +913,6 @@ canvas {
   left: 0;
   display: block;
   z-index: 1;
-  height: 200vh;
+  /* width: 100%; */
+  /* height: 200vh; */
 }
