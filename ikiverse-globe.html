@@ -8,14 +8,6 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/responsive.css" />
     <style>
-        /* body {
-            margin: 0;
-            padding: 0;
-            background: #000;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        } */
-
         #container {
             width: 100vw;
             height: 100vh;
@@ -169,66 +161,19 @@
         }
 
         function createEarth() {
-    const geometry = new THREE.SphereGeometry(1, 64, 64);
+            const geometry = new THREE.SphereGeometry(1, 64, 64);
 
-    const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load("assets/imgs/2k_jupiter.jpg");
+            const textureLoader = new THREE.TextureLoader();
+            const texture = textureLoader.load("assets/imgs/2k_jupiter.jpg");
 
-    const material = new THREE.MeshPhongMaterial({
-        map: texture,
-        shininess: 50
-    });
+            const material = new THREE.MeshPhongMaterial({
+                map: texture,
+                shininess: 50,
+            });
 
-    earth = new THREE.Mesh(geometry, material);
-    scene.add(earth);
-}
-
-        // function createEarth() {
-        //     // Geometria da esfera
-        //     const geometry = new THREE.SphereGeometry(1, 32, 32);
-
-        //     // Criar textura da Terra usando um canvas
-        //     // const canvas = document.createElement("canvas");
-        //     canvas.width = 512;
-        //     canvas.height = 256;
-        //     const ctx = canvas.getContext("2d");
-
-        //     // Criar um gradiente que simula a Terra
-        //     const gradient = ctx.createLinearGradient(
-        //         0,
-        //         0,
-        //         canvas.width,
-        //         canvas.height
-        //     );
-        //     gradient.addColorStop(0, "#4A90E2");
-        //     gradient.addColorStop(0.3, "#7FB069");
-        //     gradient.addColorStop(0.5, "#88B04B");
-        //     gradient.addColorStop(0.7, "#D2691E");
-        //     gradient.addColorStop(1, "#2E8B57");
-
-        //     ctx.fillStyle = gradient;
-        //     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        //     // Adicionar alguns "continentes" simples
-        //     ctx.fillStyle = "#228B22";
-        //     ctx.fillRect(50, 80, 100, 60);
-        //     ctx.fillRect(200, 120, 80, 40);
-        //     ctx.fillRect(350, 100, 120, 80);
-        //     ctx.fillRect(100, 180, 150, 50);
-
-        //     // Criar textura a partir do canvas
-        //     const texture = new THREE.CanvasTexture(canvas);
-
-        //     // Material da Terra
-        //     const material = new THREE.MeshPhongMaterial({
-        //         map: texture,
-        //         shininess: 100,
-        //     });
-
-        //     // Criar a mesh da Terra
-        //     earth = new THREE.Mesh(geometry, material);
-        //     scene.add(earth);
-        // }
+            earth = new THREE.Mesh(geometry, material);
+            scene.add(earth);
+        }
 
         function createStars() {
             const starsGeometry = new THREE.BufferGeometry();

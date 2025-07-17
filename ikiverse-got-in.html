@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ikiverse Go In | Ikigai</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: #000;
+            font-family: Arial, sans-serif;
+        }
+
+        #container {
+            position: relative;
+            height: 500vh;
+            /* Make it scrollable */
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        #info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: white;
+            z-index: 100;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        #instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            z-index: 100;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        #instructions h5 {
+            animation: zoomInOut 2s infinite;
+            font-size: 1rem;
+        }
+
+        .scroll-down {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: -1rem;
+        }
+
+        .scroll-down svg {
+            width: 2rem;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes zoomInOut {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="canvas-container"></div>
+        <!-- <div id="info">
+            <div>Scroll Progress: <span id="progress">0%</span></div>
+            <div>Planet Rotation: <span id="rotation">0°</span></div>
+        </div> -->
+        <div id="instructions">
+            <h5>Scroll Up & Down to Navigate!</h5>
+            <span class="scroll-down">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
+                </svg>
+
+            </span>
+        </div>
+    </div>
+
+    <script>
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        );
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000);
+        document
+            .getElementById("canvas-container")
+            .appendChild(renderer.domElement);
+
+        // Tunnel geometry
+        const tunnelGeometry = new THREE.CylinderGeometry(5, 5, 100, 32, 1, true);
+        const tunnelMaterial = new THREE.MeshBasicMaterial({
+            color: 0x222244,
+            wireframe: true,
+            side: THREE.BackSide,
+            transparent: true,
+            opacity: 0.6,
+        });
+        const tunnel = new THREE.Mesh(tunnelGeometry, tunnelMaterial);
+        tunnel.rotation.x = Math.PI / 2;
+        scene.add(tunnel);
+
+        // Tunnel rings for depth effect
+        const rings = [];
+        for (let i = 0; i < 20; i++) {
+            const ringGeometry = new THREE.RingGeometry(4, 5, 16);
+            const ringMaterial = new THREE.MeshBasicMaterial({
+                color: new THREE.Color().setHSL(0.6 + i * 0.02, 0.8, 0.3),
+                transparent: true,
+                opacity: 0.4,
+                side: THREE.DoubleSide,
+            });
+            const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+            ring.position.z = -i * 5;
+            rings.push(ring);
+            scene.add(ring);
+        }
+
+        // Planet setup
+        const planetGeometry = new THREE.SphereGeometry(3, 32, 32);
+
+        // Create planet texture using canvas
+        const canvas = document.createElement("canvas");
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext("2d");
+
+        // Create a simple planet texture
+        const gradient = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
+        gradient.addColorStop(0, "#4a90e2");
+        gradient.addColorStop(0.3, "#2c5aa0");
+        gradient.addColorStop(0.6, "#1a365d");
+        gradient.addColorStop(1, "#0f1419");
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 512, 512);
+
+        // Add some random spots for continents
+        ctx.fillStyle = "#2d5016";
+        for (let i = 0; i < 20; i++) {
+            const x = Math.random() * 512;
+            const y = Math.random() * 512;
+            const radius = Math.random() * 30 + 10;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        const planetTexture = new THREE.CanvasTexture(canvas);
+        const planetMaterial = new THREE.MeshBasicMaterial({
+            map: planetTexture,
+        });
+        const planet = new THREE.Mesh(planetGeometry, planetMaterial);
+        planet.position.z = -80;
+        scene.add(planet);
+
+        // Add atmosphere glow
+        const atmosphereGeometry = new THREE.SphereGeometry(3.2, 32, 32);
+        const atmosphereMaterial = new THREE.MeshBasicMaterial({
+            color: 0x4a90e2,
+            transparent: true,
+            opacity: 0.2,
+            side: THREE.BackSide,
+        });
+        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        atmosphere.position.z = -80;
+        scene.add(atmosphere);
+
+        // Stars
+        const starGeometry = new THREE.BufferGeometry();
+        const starPositions = [];
+        const starColors = [];
+
+        for (let i = 0; i < 1000; i++) {
+            const x = (Math.random() - 0.5) * 200;
+            const y = (Math.random() - 0.5) * 200;
+            const z = (Math.random() - 0.5) * 200;
+            starPositions.push(x, y, z);
+
+            const color = new THREE.Color();
+            color.setHSL(Math.random(), 0.5, 0.8);
+            starColors.push(color.r, color.g, color.b);
+        }
+
+        starGeometry.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute(starPositions, 3)
+        );
+        starGeometry.setAttribute(
+            "color",
+            new THREE.Float32BufferAttribute(starColors, 3)
+        );
+
+        const starMaterial = new THREE.PointsMaterial({
+            size: 2,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+        });
+
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        scene.add(stars);
+
+        // Camera initial position
+        camera.position.z = 10;
+
+        // Scroll handling
+        let scrollProgress = 0;
+        let planetRotation = 0;
+
+        function updateScrollProgress() {
+            const scrollTop =
+                window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight =
+                document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress = Math.min(scrollTop / scrollHeight, 1);
+
+            // Update camera position based on scroll
+            camera.position.z = 10 - scrollProgress * 85;
+
+            // Update planet rotation
+            planetRotation = scrollProgress * 720; // 2 full rotations
+            planet.rotation.y = (planetRotation * Math.PI) / 180;
+            atmosphere.rotation.y = (planetRotation * Math.PI) / 180;
+
+            // Update tunnel effect
+            tunnel.rotation.z = scrollProgress * Math.PI * 4;
+
+            // Update rings
+            rings.forEach((ring, index) => {
+                ring.rotation.z = scrollProgress * Math.PI * 2 + index * 0.5;
+                ring.material.opacity =
+                    0.4 + Math.sin(scrollProgress * Math.PI * 2 + index) * 0.2;
+            });
+
+            // Update stars rotation
+            stars.rotation.y = scrollProgress * Math.PI * 0.5;
+
+            // Update UI
+            document.getElementById("progress").textContent =
+                Math.round(scrollProgress * 100) + "%";
+            document.getElementById("rotation").textContent =
+                Math.round(planetRotation) + "°";
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Continuous planet rotation
+            planet.rotation.x += 0.005;
+            atmosphere.rotation.x += 0.003;
+
+            // Subtle tunnel animation
+            tunnel.material.opacity = 0.6 + Math.sin(Date.now() * 0.001) * 0.1;
+
+            // Twinkling stars
+            const positions = stars.geometry.attributes.position.array;
+            for (let i = 0; i < positions.length; i += 3) {
+                positions[i + 2] += Math.sin(Date.now() * 0.001 + i) * 0.01;
+            }
+            stars.geometry.attributes.position.needsUpdate = true;
+
+            renderer.render(scene, camera);
+        }
+
+        // Event listeners
+        window.addEventListener("scroll", updateScrollProgress);
+        window.addEventListener("resize", () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Start animation
+        animate();
+        updateScrollProgress();
+    </script>
+</body>
+
+</html>
