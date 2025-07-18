@@ -255,74 +255,12 @@
         // Camera initial position
         camera.position.z = 10;
 
-        // Variables for automatic animation
+        // Scroll handling
         let scrollProgress = 0;
         let planetRotation = 0;
-        let animationStartTime = null;
-        let isAutoAnimating = false;
-        const animationDuration = 5000; // 5 segundos
 
-        // Função para atualizar os efeitos baseado no progresso
-        function updateEffects(progress) {
-            // Update camera position based on progress
-            camera.position.z = 10 - progress * 85;
-
-            // Update planet rotation
-            planetRotation = progress * 720; // 2 full rotations
-            planet.rotation.y = (planetRotation * Math.PI) / 180;
-            atmosphere.rotation.y = (planetRotation * Math.PI) / 180;
-
-            // Update tunnel effect
-            tunnel.rotation.z = progress * Math.PI * 4;
-
-            // Update rings
-            rings.forEach((ring, index) => {
-                ring.rotation.z = progress * Math.PI * 2 + index * 0.5;
-                ring.material.opacity =
-                    0.4 + Math.sin(progress * Math.PI * 2 + index) * 0.2;
-            });
-
-            // Update stars rotation
-            stars.rotation.y = progress * Math.PI * 0.5;
-        }
-
-        // Função para animação automática
-        function startAutoAnimation() {
-            isAutoAnimating = true;
-            animationStartTime = Date.now();
-            
-            function animateProgress() {
-                if (!isAutoAnimating) return;
-
-                const elapsed = Date.now() - animationStartTime;
-                const rawProgress = elapsed / animationDuration;
-                
-                // Usar uma função de easing para suavizar a animação
-                const progress = Math.min(1, easeInOutCubic(rawProgress));
-                
-                updateEffects(progress);
-                scrollProgress = progress;
-
-                if (progress < 1) {
-                    requestAnimationFrame(animateProgress);
-                } else {
-                    isAutoAnimating = false;
-                    console.log("Animação automática concluída");
-                }
-            }
-
-            animateProgress();
-        }
-
-        // Função de easing para animação suave
-        function easeInOutCubic(t) {
-            return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-        }
-
-        // Função original do scroll (mantida para funcionalidade manual)
         function updateScrollProgress() {
-            // Só atualiza se não estiver na animação automática
-            if (isAutoAnimating) return;
+            console.log("Carregando o Method");
 
             const scrollTop =
                 window.pageYOffset || document.documentElement.scrollTop;
@@ -330,7 +268,34 @@
                 document.documentElement.scrollHeight - window.innerHeight;
             scrollProgress = Math.min(scrollTop / scrollHeight, 1);
 
-            updateEffects(scrollProgress);
+            // Update camera position based on scroll
+            camera.position.z = 10 - scrollProgress * 85;
+
+            // Update planet rotation
+            planetRotation = scrollProgress * 720; // 2 full rotations
+            planet.rotation.y = (planetRotation * Math.PI) / 180;
+            atmosphere.rotation.y = (planetRotation * Math.PI) / 180;
+
+            // Update tunnel effect
+            tunnel.rotation.z = scrollProgress * Math.PI * 4;
+
+            // Update rings
+            rings.forEach((ring, index) => {
+                ring.rotation.z = scrollProgress * Math.PI * 2 + index * 0.5;
+                ring.material.opacity =
+                    0.4 + Math.sin(scrollProgress * Math.PI * 2 + index) * 0.2;
+            });
+
+            // Update stars rotation
+            stars.rotation.y = scrollProgress * Math.PI * 0.5;
+
+            console.log("Ternimou o Scroll");
+
+            // Update UI
+            // document.getElementById("progress").textContent =
+            //     Math.round(scrollProgress * 100) + "%";
+            // document.getElementById("rotation").textContent =
+            //     Math.round(planetRotation) + "°";
         }
 
         // Animation loop
@@ -362,14 +327,15 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Start animation and automatic effect when page loads
+        // Start animation
+        // animate();
+        // updateScrollProgress();
+
+        //SetTimeOut
         window.addEventListener("load", () => {
             animate();
-            
-            // Iniciar animação automática após um pequeno delay
-            setTimeout(() => {
-                startAutoAnimation();
-            }, 500);
+            updateScrollProgress();
+            // setTimeout(updateScrollProgress, 8000);
         });
     </script>
 </body>
